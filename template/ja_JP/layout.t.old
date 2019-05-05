@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/css/ethna.css" type="text/css" />
+<title>通販サイト</title>
+</head>
+<header>
+    <div id="header-inner">
+        <div id="header-logo">
+            <h1> 通販サイト</h1>
+        </div>
+        <nav>
+        <ul id="header-Nav">
+            <li>
+                <a href="#">マイページ</a>
+            </li>
+            <li>
+                <a href="#">マイカート</a>
+            </li>
+        </div>
+        </nav>
+    </div>
+    <div id="header-menu">
+        <nav>
+        <ul id="header-menu-contents">
+            <li>
+                <a href="#">HOME</a>
+            </li>
+            <li>
+                <a href="#">ABOUT</a>
+            </li>
+            <li>
+                <a href="#">SHOP</a>
+            </li>
+            <li>
+                <a href="#">LOCATION</a>
+            </li>
+            <li>
+                <a href="#">CONTACT</a>
+            </li>
+        </ul>
+        </nav>
+    </div>
+</header>
+<body>
+<div id="sidebar">
+</div>
+<div id="header">
+    <h1>Sample</h1>
+</div>
+
+<div id="main">
+{$content}
+</div>
+
+<div id="footer">
+    Powered By Ethnam - {$smarty.const.ETHNA_VERSION}.
+</div>
+</body>
+</html>
