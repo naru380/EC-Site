@@ -112,11 +112,13 @@ class Sample_Action_MycartAdd extends Sample_AuthActionClass
      */
     public function perform()
     {
-        $um = new Sample_UserManager();
+        //$um = new Sample_UserManager();
         $im = new Sample_ItemManager();
         $mm = new Sample_MycartManager();
 
-        $user_id = $um->getUserInfo($this->session->get('mail_address'))['id'];
+        //$user_id = $um->getUserInfo($this->session->get('mail_address'))['id'];
+        $user_id = $this->session->get('id');
+        
         $item_id = $this->af->get('item_id');
         $num = $this->af->get('item_num');
 

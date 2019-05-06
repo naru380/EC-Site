@@ -120,7 +120,8 @@ class Sample_Action_LoginDo extends Sample_ActionClass
 
         $this->session->start();
         $this->session->set('auth', 'ok');
-        $this->session->set('mail_address', $this->af->get('mail_address'));
+        //$this->session->set('mail_address', $this->af->get('mail_address'));
+        $this->session->set('id', $result);
 
         return 'index';
     }

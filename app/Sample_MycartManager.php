@@ -55,7 +55,7 @@ class Sample_MycartManager
         $pdo = null;
 
         //if (count($result) == 0) {
-        if ($stmt->rowCount() == 0) {
+        if ($stmt->rowCount() === 0) {
             $this->insertDB($user_id, $item_id, $num);
         } else {
             $this->updateDB($user_id, $item_id, $result['num'] + $num);
@@ -63,7 +63,7 @@ class Sample_MycartManager
     }
 
     public function removeItem($user_id, $item_id) {
-        if ($item_id == 0) {
+        if ($item_id === 0) {
             $this->deleteDB($user_id, null, true);
         } else {
             $this->deleteDB($user_id, $item_id, false);

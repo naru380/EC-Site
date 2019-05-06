@@ -106,10 +106,11 @@ class Sample_Action_MycartDelete extends Sample_ActionClass
      */
     public function perform()
     {
-        $um = new Sample_UserManager();
+        //$um = new Sample_UserManager();
         $mm = new Sample_MycartManager();
 
-        $user_id = $um->getUserInfo($this->session->get('mail_address'))['id'];
+        //$user_id = $um->getUserInfo($this->session->get('mail_address'))['id'];
+        $user_id = $this->session->get('id');
         $item_id = $this->af->get('delete');
 
         $mm->removeItem($user_id, $item_id);

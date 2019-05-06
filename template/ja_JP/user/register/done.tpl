@@ -1,3 +1,2 @@
-  <h2>New Template</h2>
-  <p>hello, world!</p>
-{$form.uniqid}
+<h2>新規登録</h2>
+<p>登録が完了しました！</p>

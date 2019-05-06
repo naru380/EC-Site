@@ -1,31 +1,42 @@
 <?php
 /**
- *  User/Register/Done.php
+ *  Change/Password/Do.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  user_register_done Form implementation.
+ *  change_password_do Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_UserRegisterDone extends Sample_ActionForm
+class Sample_Form_ChangePasswordDo extends Sample_ActionForm
 {
     /**
      *  @access protected
      *  @var    array   form definition.
      */
     public $form = array(
-            'uniqid' => array(
-                'required'  => true,
+            'new_password' => array(
+                'name'          => 'パスワード',
+                'type'          => VAR_TYPE_STRING,
+                'form_type'     => FORM_TYPE_PASSWORD,
+                'required'      => true,
             ),
-            'id' => array(
-                'type'  => VAR_TYPE_INT,
-                'required'  => true,
+            'confirm_password' => array(
+                'name'          => 'パスワード',
+                'type'          => VAR_TYPE_STRING,
+                'form_type'     => FORM_TYPE_PASSWORD,
+                'required'      => true,
+            ),
+            'password' => array(
+                'name'          => 'パスワード',
+                'type'          => VAR_TYPE_STRING,
+                'form_type'     => FORM_TYPE_PASSWORD,
+                'required'      => true,
             ),
        /*
         *  TODO: Write form definition which this action uses.
@@ -70,16 +81,16 @@ class Sample_Form_UserRegisterDone extends Sample_ActionForm
 }
 
 /**
- *  user_register_done action implementation.
+ *  change_password_do action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_UserRegisterDone extends Sample_ActionClass
+class Sample_Action_ChangePasswordDo extends Sample_ActionClass
 {
     /**
-     *  preprocess of user_register_done Action.
+     *  preprocess of change_password_do Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -87,6 +98,9 @@ class Sample_Action_UserRegisterDone extends Sample_ActionClass
      */
     public function prepare()
     {
+        if ($this->af->validate() > 0) {
+            return 'change_password';
+        }
         /**
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
@@ -98,40 +112,31 @@ class Sample_Action_UserRegisterDone extends Sample_ActionClass
     }
 
     /**
-     *  user_register_done action implementation.
+     *  change_password_do action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     public function perform()
     {
-        if (!Ethna_Util::isDuplicatePost() ) {
-            return 'index';
-        }
-
-        $id = $this->af->get('id');
-        echo $id;
-
         $um = new Sample_UserManager();
-        $result = $um->register($id);
+        $id = $this->session->get('id');
+        $password = $this->af->get('password');
+        $new_password = $this->af->get('new_password');
+        $confirm_password = $this->af->get('confirm_password');
 
+        if ($new_password !== $confirm_password) {
+            $this->ae->addObject('confirm_password', Ethna::raiseNotice('パスワードが一致しません', null));
+            return 'change_password';
+        }
+
+        $result = $um->changePassword($id, $new_password, $password);
+        
         if (Ethna::isError($result)) {
-            return 'index';
+            $this->ae->addObject('password', $result);
+            return 'change_password';
         }
 
-        //$user_info = $um->getUserInfo($this->af->get('id'));
-        /*
-        if (Ethna::isError($user_info)) {
-            $this->ae->addObject('mail_address', $result);
-            return 'user_register';
-        }
-        */
-
-        $this->session->start();
-        $this->session->set('auth', 'ok');
-        $this->session->set('id', $id);
-
-        return 'user_register_done';
-        //return 'index';
+        return 'mypage';
     }
 }

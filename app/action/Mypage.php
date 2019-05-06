@@ -98,13 +98,6 @@ class Sample_Action_Mypage extends Sample_AuthActionClass
      */
     public function perform()
     {
-        $um = new Sample_UserManager();
-        $user_info = $um->getUserInfo($this->session->get('mail_address'));
-
-        $this->af->set('name', $user_info['name']);
-        $this->af->set('mail_address', $user_info['mail_address']);
-        $this->af->set('password', $user_info['password']);
-
         return 'mypage';
     }
 }

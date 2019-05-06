@@ -18,7 +18,7 @@
 
 <h2>セッション</h2>
 <p>auth={$session.auth}</p>
-<p>auth={$session.id}</p>
+<p>id={$session.id}</p>
 <p>name={$session.name}</p>
 <p>mail_address={$session.mail_address}</p>
 <p>password={$session.password}</p>

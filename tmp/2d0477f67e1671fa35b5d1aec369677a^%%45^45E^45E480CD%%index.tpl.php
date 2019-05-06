@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-02 12:23:32
+<?php /* Smarty version 2.6.31, created on 2019-05-06 14:09:06
          compiled from index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('block', 'form', 'index.tpl', 9, false),array('function', 'message', 'index.tpl', 11, false),array('function', 'form_input', 'index.tpl', 12, false),array('function', 'form_submit', 'index.tpl', 13, false),)), $this); ?>
@@ -27,7 +27,7 @@ smarty_core_load_plugins(array('plugins' => array(array('block', 'form', 'index.
 <h2>セッション</h2>
 <p>auth=<?php echo $this->_tpl_vars['session']['auth']; ?>
 </p>
-<p>auth=<?php echo $this->_tpl_vars['session']['id']; ?>
+<p>id=<?php echo $this->_tpl_vars['session']['id']; ?>
 </p>
 <p>name=<?php echo $this->_tpl_vars['session']['name']; ?>
 </p>

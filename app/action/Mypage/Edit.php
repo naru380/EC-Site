@@ -1,32 +1,25 @@
 <?php
 /**
- *  User/Register/Done.php
+ *  Mypage/Edit.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  user_register_done Form implementation.
+ *  mypage_edit Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_UserRegisterDone extends Sample_ActionForm
+class Sample_Form_MypageEdit extends Sample_ActionForm
 {
     /**
      *  @access protected
      *  @var    array   form definition.
      */
     public $form = array(
-            'uniqid' => array(
-                'required'  => true,
-            ),
-            'id' => array(
-                'type'  => VAR_TYPE_INT,
-                'required'  => true,
-            ),
        /*
         *  TODO: Write form definition which this action uses.
         *  @see http://ethna.jp/ethna-document-dev_guide-form.html
@@ -70,16 +63,16 @@ class Sample_Form_UserRegisterDone extends Sample_ActionForm
 }
 
 /**
- *  user_register_done action implementation.
+ *  mypage_edit action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_UserRegisterDone extends Sample_ActionClass
+class Sample_Action_MypageEdit extends Sample_AuthActionClass
 {
     /**
-     *  preprocess of user_register_done Action.
+     *  preprocess of mypage_edit Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -98,40 +91,19 @@ class Sample_Action_UserRegisterDone extends Sample_ActionClass
     }
 
     /**
-     *  user_register_done action implementation.
+     *  mypage_edit action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     public function perform()
     {
-        if (!Ethna_Util::isDuplicatePost() ) {
-            return 'index';
-        }
-
-        $id = $this->af->get('id');
-        echo $id;
-
         $um = new Sample_UserManager();
-        $result = $um->register($id);
+        $user = $um->getUserInfo($this->session->get('id'));
 
-        if (Ethna::isError($result)) {
-            return 'index';
-        }
-
-        //$user_info = $um->getUserInfo($this->af->get('id'));
-        /*
-        if (Ethna::isError($user_info)) {
-            $this->ae->addObject('mail_address', $result);
-            return 'user_register';
-        }
-        */
-
-        $this->session->start();
-        $this->session->set('auth', 'ok');
-        $this->session->set('id', $id);
-
-        return 'user_register_done';
-        //return 'index';
+        $this->af->set('name', $user['name']);
+        $this->af->set('address', $user['address']);
+        
+        return 'mypage_edit';
     }
 }

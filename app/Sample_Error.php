@@ -9,6 +9,8 @@
 
     define('E_SAMPLE_AUTH', -128);
     define('E_SAMPLE_USER_RGISTERED', -129);
+    define('E_SAMPLE_USER_PASSWORD', -130);
+    define('E_SAMPLE_INVALID_QUERY', -256);
 
 /*--- Application Error Definition ---*/
 /*

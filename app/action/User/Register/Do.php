@@ -125,7 +125,7 @@ class Sample_Action_UserRegisterDo extends Sample_ActionClass
         }
 
         $um = new Sample_UserManager();
-        //$result = $um->register($this->af->get('name'), $this->af->get('mail_address'), $this->af->get('password'));
+        $result = $um->tempRegister($this->af->get('name'), $this->af->get('mail_address'), $this->af->get('password'));
 
         if (Ethna::isError($result)) {
             $this->ae->addObject('mail_address', $result);
@@ -135,7 +135,7 @@ class Sample_Action_UserRegisterDo extends Sample_ActionClass
         $to = $this->af->get('mail_address');
         $toname= $this->af->get('name');
         $subject= '通販サイトにご登録ありがとうございます';
-        $url = 'http://localhost/?action_user_register_done=true&uniqid=' . $this->af->get('uniqid');
+        $url = 'http://localhost/?action_user_register_done=true&id=' . $result . '&uniqid=' . $this->af->get('uniqid');
 
         $ethna_mail =& new Ethna_MailSender($this->backend);
         $mail_var = array('username' => $toname, 'url' => $url);
@@ -144,12 +144,6 @@ class Sample_Action_UserRegisterDo extends Sample_ActionClass
 
         $mail = new Sample_MailManager();
         $mail->sendMail($to, $toname, $subject, $body);
-
-        /*
-        $this->session->start();
-        $this->session->set('auth', 'ok');
-        $this->session->set('mail_address', $this->af->get('mail_address'));
-        */
 
         return 'user_register_do';
     }
