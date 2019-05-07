@@ -8,6 +8,10 @@ $config = array(
     // site
     'url' => '',
 
+    // admin
+    'id' => 'admin',
+    'password' => 'password',
+
     // debug
     // (to enable ethna_info and ethna_unittest, turn this true)
     'debug' => false,

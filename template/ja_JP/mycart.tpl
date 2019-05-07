@@ -21,7 +21,7 @@
     </div>
 {/foreach}
 
-<div class="mycart-account">
+<div class="mycart-prcedure">
     <p>合計: {$form.check|number_format}円</p>
     <form action="." method="post">
         <input type="hidden" name="delete" value="0">

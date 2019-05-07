@@ -25,6 +25,7 @@ require_once 'Sample_ItemManager.php';
 require_once 'Sample_MycartManager.php';
 require_once 'Sample_MailManager.php';
 require_once 'Sample_AuthActionClass.php';
+require_once 'Sample_AdminActionClass.php';
 
 /**
  *  Sample application Controller definition.

@@ -1,7 +1,15 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-04 10:54:30
+<?php /* Smarty version 2.6.31, created on 2019-05-07 16:02:12
          compiled from shop.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'shop.tpl', 5, false),array('modifier', 'number_format', 'shop.tpl', 11, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'shop.tpl', 12, false),array('modifier', 'number_format', 'shop.tpl', 18, false),)), $this); ?>
+<div id="search_box">
+    <form action="." method="post">
+        <input type="search" name="search" placeholder="キーワード" value="<?php echo $this->_tpl_vars['form']['search']; ?>
+">
+        <input type="submit" name="action_search_item" value="検索">
+    </form>
+</div>
+
 <h2>取扱商品</h2>
 <?php $_from = $this->_tpl_vars['form']['items']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['item']):

@@ -1,3 +1,10 @@
+<div id="search_box">
+    <form action="." method="post">
+        <input type="search" name="search" placeholder="キーワード" value="{$form.search}">
+        <input type="submit" name="action_search_item" value="検索">
+    </form>
+</div>
+
 <h2>取扱商品</h2>
 {foreach from=$form.items item=item}
     <div class="item-list">

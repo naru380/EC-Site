@@ -23,8 +23,13 @@ class Sample_View_Shop extends Sample_ViewClass
     public function preforward()
     {
         $im = new Sample_ItemManager();
-        $items = $im->getAllItemInfo();
-        $this->af->set('items', $items);
+        if(empty($this->af->get('search'))) {
+            $items = $im->getAllItemInfo();
+            $this->af->set('items', $items);
+        } else {
+            $items = $im->getItemInfoWithKeyword($this->af->get('search'));
+            $this->af->set('items', $items);
+        }
     }
 }
 

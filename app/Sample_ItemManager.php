@@ -37,4 +37,40 @@ class Sample_ItemManager
 
         return $data;
     }
+
+    public function getItemInfoWithKeyword($keyword)
+    {
+        $keyword = str_replace(' ', ' ', $keyword);
+        $keyword = trim($keyword);
+        $keyword = preg_replace('/\s+/', ' ', $keyword);
+        $keyword = explode(' ', $keyword);
+
+        if (count($keyword) === 1 && empty($keyword[0])) {
+            return null;
+        }
+
+        try {
+            $pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+            $pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
+
+            $command = 'SELECT * FROM items WHERE';
+            $command .= " name LIKE '%$keyword[0]%'";
+            if (count($keyword) > 1) {
+                $keyword = array_slice($keyword, 1);
+                foreach ($keyword as $word) {
+                    $command .= " AND name like '%$word%'";
+                }
+            }
+
+            $stmt = $pdo->prepare($command);
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+        $pdo = null;
+
+        return $data;
+    }
 }

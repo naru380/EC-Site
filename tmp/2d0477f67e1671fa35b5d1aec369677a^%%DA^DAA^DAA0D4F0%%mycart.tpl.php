@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-04 22:59:25
+<?php /* Smarty version 2.6.31, created on 2019-05-07 22:18:57
          compiled from mycart.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'mycart.tpl', 6, false),array('modifier', 'number_format', 'mycart.tpl', 12, false),)), $this); ?>
@@ -33,7 +33,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'myca
     </div>
 <?php endforeach; endif; unset($_from); ?>
 
-<div class="mycart-account">
+<div class="mycart-prcedure">
     <p>合計: <?php echo ((is_array($_tmp=$this->_tpl_vars['form']['check'])) ? $this->_run_mod_handler('number_format', true, $_tmp) : smarty_modifier_number_format($_tmp)); ?>
 円</p>
     <form action="." method="post">

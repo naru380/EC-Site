@@ -149,6 +149,27 @@ footer {
     padding: 0px 10px;
 }
 
+/*
+.mycart-item {
+    height: 1000px;
+    border: 1px solid #EEEEEE;
+    margin-bottom: 40px;
+    margin-right: 40px;
+    padding: 20px 0px;
+    float: left;
+}
+
+.mycart-item img {
+    display: inline-block;
+    background-color: #CCCCCC;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 250px;
+    background-size: contain;
+    margin: 10px 0px;
+}
+*/
 
 /*
 #main img {

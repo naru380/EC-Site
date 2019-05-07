@@ -48,9 +48,11 @@
                     <li>
                         <a href="/?action_shop=true">SHOP</a>
                     </li>
+                    <!--
                     <li>
                         <a href="#">LOCATION</a>
                     </li>
+                    -->
                     <li>
                         <a href="?action_contact=true">CONTACT</a>
                     </li>
