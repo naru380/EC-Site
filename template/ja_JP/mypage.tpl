@@ -11,4 +11,4 @@
 
 <a href="/?action_mypage_edit=true">アカウント情報の編集</a>
 <a href="/?action_change_password=true">パスワードの変更</a>
-<a href="/?action_user_delete_=true">退会</a>
+<a href="/?action_user_leave=true">退会</a>

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-05 22:47:08
+<?php /* Smarty version 2.6.31, created on 2019-05-07 09:38:49
          compiled from user/register.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'message', 'user/register.tpl', 5, false),array('function', 'uniqid', 'user/register.tpl', 22, false),)), $this); ?>

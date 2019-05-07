@@ -1,43 +1,25 @@
 <?php
 /**
- *  Change/Password/Do.php
+ *  Contact.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  change_password_do Form implementation.
+ *  contact Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_ChangePasswordDo extends Sample_ActionForm
+class Sample_Form_Contact extends Sample_ActionForm
 {
     /**
      *  @access protected
      *  @var    array   form definition.
      */
     public $form = array(
-            'new_password' => array(
-                'name'          => 'パスワード',
-                'type'          => VAR_TYPE_STRING,
-                'form_type'     => FORM_TYPE_PASSWORD,
-                'required'      => true,
-            ),
-            'confirm_password' => array(
-                'name'          => 'パスワード',
-                'type'          => VAR_TYPE_STRING,
-                'form_type'     => FORM_TYPE_PASSWORD,
-                'required'      => true,
-            ),
-            'password' => array(
-                'name'          => 'パスワード',
-                'type'          => VAR_TYPE_STRING,
-                'form_type'     => FORM_TYPE_PASSWORD,
-                'required'      => true,
-            ),
        /*
         *  TODO: Write form definition which this action uses.
         *  @see http://ethna.jp/ethna-document-dev_guide-form.html
@@ -81,16 +63,16 @@ class Sample_Form_ChangePasswordDo extends Sample_ActionForm
 }
 
 /**
- *  change_password_do action implementation.
+ *  contact action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_ChangePasswordDo extends Sample_AuthActionClass
+class Sample_Action_Contact extends Sample_ActionClass
 {
     /**
-     *  preprocess of change_password_do Action.
+     *  preprocess of contact Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -98,9 +80,6 @@ class Sample_Action_ChangePasswordDo extends Sample_AuthActionClass
      */
     public function prepare()
     {
-        if ($this->af->validate() > 0) {
-            return 'change_password';
-        }
         /**
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
@@ -112,31 +91,23 @@ class Sample_Action_ChangePasswordDo extends Sample_AuthActionClass
     }
 
     /**
-     *  change_password_do action implementation.
+     *  contact action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     public function perform()
     {
+        if (strcmp($this->session->get('auth'), 'ok')) {
+            return 'contact';
+        }
+
         $um = new Sample_UserManager();
-        $id = $this->session->get('id');
-        $password = $this->af->get('password');
-        $new_password = $this->af->get('new_password');
-        $confirm_password = $this->af->get('confirm_password');
-
-        if ($new_password !== $confirm_password) {
-            $this->ae->addObject('confirm_password', Ethna::raiseNotice('パスワードが一致しません', null));
-            return 'change_password';
-        }
-
-        $result = $um->changePassword($id, $new_password, $password);
+        $user = $um->getUserInfo($this->session->get('id'));
         
-        if (Ethna::isError($result)) {
-            $this->ae->addObject('password', $result);
-            return 'change_password';
-        }
+        $this->af->set('name', $user['name']);
+        $this->af->set('mail_address', $user['mail_address']);
 
-        return 'mypage';
+        return 'contact';
     }
 }

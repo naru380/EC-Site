@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-05 17:20:20
+<?php /* Smarty version 2.6.31, created on 2019-05-07 11:17:03
          compiled from layout.tpl */ ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -45,7 +45,7 @@
                         <a href="/">HOME</a>
                     </li>
                     <li>
-                        <a href="#">ABOUT</a>
+                        <a href="/?action_about=true">ABOUT</a>
                     </li>
                     <li>
                         <a href="/?action_shop=true">SHOP</a>
@@ -54,7 +54,7 @@
                         <a href="#">LOCATION</a>
                     </li>
                     <li>
-                        <a href="#">CONTACT</a>
+                        <a href="?action_contact=true">CONTACT</a>
                     </li>
                 </ul>
             </div>

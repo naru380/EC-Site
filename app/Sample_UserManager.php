@@ -146,6 +146,20 @@ class Sample_UserManager
         return null;
     }
 
+    public function deleteDB($id)
+    {
+        try {
+            $pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+            $pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
+            $stmt = $pdo->prepare('DELETE FROM users WHERE id = ?');
+            $stmt->execute([$id]);
+
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+        $pdo = null;
+    }
+
     private function insertDB($name, $address, $mail_address, $password, $is_valid) {
         try {
             $pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-06 20:44:47
+<?php /* Smarty version 2.6.31, created on 2019-05-07 00:59:39
          compiled from mypage.tpl */ ?>
 <h2>マイページ</h2>
 <p>名前: <?php echo $this->_tpl_vars['form']['user']['name']; ?>
@@ -18,4 +18,4 @@
 
 <a href="/?action_mypage_edit=true">アカウント情報の編集</a>
 <a href="/?action_change_password=true">パスワードの変更</a>
-<a href="/?action_user_delete_=true">退会</a>
+<a href="/?action_user_leave=true">退会</a>

@@ -1,39 +1,39 @@
 <?php
 /**
- *  Change/Password/Do.php
+ *  Contact/Do.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  change_password_do Form implementation.
+ *  contact_do Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_ChangePasswordDo extends Sample_ActionForm
+class Sample_Form_ContactDo extends Sample_ActionForm
 {
     /**
      *  @access protected
      *  @var    array   form definition.
      */
     public $form = array(
-            'new_password' => array(
-                'name'          => 'パスワード',
+            'name' => array(
+                'name'          => '名前',
                 'type'          => VAR_TYPE_STRING,
-                'form_type'     => FORM_TYPE_PASSWORD,
+                'form_type'     => FORM_TYPE_TEXT,
                 'required'      => true,
             ),
-            'confirm_password' => array(
-                'name'          => 'パスワード',
+            'mail_address' => array(
+                'name'          => 'メールアドレス',
                 'type'          => VAR_TYPE_STRING,
-                'form_type'     => FORM_TYPE_PASSWORD,
+                'form_type'     => FORM_TYPE_TEXT,
                 'required'      => true,
             ),
-            'password' => array(
-                'name'          => 'パスワード',
+            'content' => array(
+                'name'          => 'お問い合わせ内容',
                 'type'          => VAR_TYPE_STRING,
                 'form_type'     => FORM_TYPE_PASSWORD,
                 'required'      => true,
@@ -81,16 +81,16 @@ class Sample_Form_ChangePasswordDo extends Sample_ActionForm
 }
 
 /**
- *  change_password_do action implementation.
+ *  contact_do action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_ChangePasswordDo extends Sample_AuthActionClass
+class Sample_Action_ContactDo extends Sample_ActionClass
 {
     /**
-     *  preprocess of change_password_do Action.
+     *  preprocess of contact_do Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -99,7 +99,7 @@ class Sample_Action_ChangePasswordDo extends Sample_AuthActionClass
     public function prepare()
     {
         if ($this->af->validate() > 0) {
-            return 'change_password';
+            return 'contact';
         }
         /**
         if ($this->af->validate() > 0) {
@@ -112,31 +112,29 @@ class Sample_Action_ChangePasswordDo extends Sample_AuthActionClass
     }
 
     /**
-     *  change_password_do action implementation.
+     *  contact_do action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     public function perform()
     {
-        $um = new Sample_UserManager();
-        $id = $this->session->get('id');
-        $password = $this->af->get('password');
-        $new_password = $this->af->get('new_password');
-        $confirm_password = $this->af->get('confirm_password');
+        $mm = new Sample_MailManager();
+        $from = $this->af->get('mail_address');
+        $fromname= $this->af->get('name');
+        $to = 'ec.sample.0510@gmail.com';
+        $toname= '通販サイト';
+        $subject = 'お問い合わせ';
+        $content = $this->af->get('content');
 
-        if ($new_password !== $confirm_password) {
-            $this->ae->addObject('confirm_password', Ethna::raiseNotice('パスワードが一致しません', null));
-            return 'change_password';
-        }
+        $ethna_mail =& new Ethna_MailSender($this->backend);
+        $mail_var = array('username' => $fromname, 'mail_address' => $from, 'content' => $content);
 
-        $result = $um->changePassword($id, $new_password, $password);
-        
-        if (Ethna::isError($result)) {
-            $this->ae->addObject('password', $result);
-            return 'change_password';
-        }
+        $body = $ethna_mail->send(null, 'contact.tpl', $mail_var);
 
-        return 'mypage';
+        $mail = new Sample_MailManager();
+        $mail->sendMail($to, $toname, $subject, $body);
+
+        return 'contact_do';
     }
 }

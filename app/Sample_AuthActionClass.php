@@ -22,6 +22,12 @@ class Sample_AuthActionClass extends Sample_ActionClass
 
         if (! $this->session->isStart())
         {
+            $this->session->start();
+        }
+
+
+        if (strcmp($this->session->get('auth'), 'ok'))
+        {
             return 'login';
         }
 

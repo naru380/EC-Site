@@ -43,7 +43,7 @@
                         <a href="/">HOME</a>
                     </li>
                     <li>
-                        <a href="#">ABOUT</a>
+                        <a href="/?action_about=true">ABOUT</a>
                     </li>
                     <li>
                         <a href="/?action_shop=true">SHOP</a>
@@ -52,7 +52,7 @@
                         <a href="#">LOCATION</a>
                     </li>
                     <li>
-                        <a href="#">CONTACT</a>
+                        <a href="?action_contact=true">CONTACT</a>
                     </li>
                 </ul>
             </div>
