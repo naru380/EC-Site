@@ -22,6 +22,11 @@ class Sample_View_Item extends Sample_ViewClass
      */
     public function preforward()
     {
+        $im = new Sample_ItemManager();
+        $item = $im->getItemInfoWithId($this->af->get('item_id'));
+        $im->addView($this->af->get('item_id'));
+
+        $this->af->set('item', $item);
     }
 }
 

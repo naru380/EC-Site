@@ -26,9 +26,11 @@ class Sample_View_Shop extends Sample_ViewClass
         if(empty($this->af->get('search'))) {
             $items = $im->getAllItemInfo();
             $this->af->set('items', $items);
+            $this->af->set('item_num', -1);
         } else {
             $items = $im->getItemInfoWithKeyword($this->af->get('search'));
             $this->af->set('items', $items);
+            $this->af->set('item_num', count($items));
         }
     }
 }

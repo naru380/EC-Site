@@ -1,25 +1,36 @@
 <?php
 /**
- *  Logout.php
+ *  Mycart/Purchase/Do.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  logout Form implementation.
+ *  mycart_purchase_do Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_Logout extends Sample_ActionForm
+class Sample_Form_MycartPurchaseDo extends Sample_ActionForm
 {
     /**
      *  @access protected
      *  @var    array   form definition.
      */
     public $form = array(
+            'name' => array(
+                'type'      => VAR_TYPE_STRING,
+                'form_type' => FORM_TYPE_TEXT,
+            ),
+            'address' => array(
+                'type'      => VAR_TYPE_STRING,
+                'form_type' => FORM_TYPE_TEXT,
+            ),
+            'mycart_purchase_do' => array(
+                'form_type' => FORM_TYPE_HIDDEN,
+            ),
        /*
         *  TODO: Write form definition which this action uses.
         *  @see http://ethna.jp/ethna-document-dev_guide-form.html
@@ -63,16 +74,16 @@ class Sample_Form_Logout extends Sample_ActionForm
 }
 
 /**
- *  logout action implementation.
+ *  mycart_purchase_do action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_Logout extends Sample_AuthActionClass
+class Sample_Action_MycartPurchaseDo extends Sample_AuthActionClass
 {
     /**
-     *  preprocess of logout Action.
+     *  preprocess of mycart_purchase_do Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -80,6 +91,9 @@ class Sample_Action_Logout extends Sample_AuthActionClass
      */
     public function prepare()
     {
+        if ($this->af->validate() > 0) {
+            return 'mycart_purchase';
+        }
         /**
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
@@ -91,16 +105,41 @@ class Sample_Action_Logout extends Sample_AuthActionClass
     }
 
     /**
-     *  logout action implementation.
+     *  mycart_purchase_do action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     public function perform()
     {
-        $this->session->set('auth', null);
-        $this->session->set('id', null);
-        $this->session->destroy();
-        return 'logout';
+        $id = $this->session->get('id');
+        $address = $this->af->get('address');
+
+        $mm = new Sample_MycartManager();
+        $items = $mm->getMycart($id);
+        $check = 0;
+        foreach ($items as $item) {
+            $check += $item['price'] * $item['num']; 
+        }
+
+        $um = new Sample_UserManager();
+        $user = $um->getUserInfo($id);
+
+        $to = $user['mail_address'];
+        $toname= $this->af->get('name');
+
+        $subject= '通販サイトのご利用ありがとうございます';
+
+        $ethna_mail =& new Ethna_MailSender($this->backend);
+        $mail_var = array('username' => $toname, 'address' => $address, 'items' => $items, 'check' => $check);
+
+        $body = $ethna_mail->send(null, 'purchase.tpl', $mail_var);
+
+        $mail = new Sample_MailManager();
+        $mail->sendMail($to, $toname, $subject, $body);
+
+        $mm->removeItem($this->session->get('id'), 0);
+
+        return 'mycart_purchase_do';
     }
 }

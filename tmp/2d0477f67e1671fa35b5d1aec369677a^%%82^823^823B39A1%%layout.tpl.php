@@ -1,10 +1,11 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-07 16:04:58
+<?php /* Smarty version 2.6.31, created on 2019-05-08 18:00:36
          compiled from layout.tpl */ ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="/css/ethna.css" type="text/css" />
+<link rel="stylesheet" href="/css/ethna2.css" type="text/css" />
 <title>通販サイト</title>
 </head>
     <header>

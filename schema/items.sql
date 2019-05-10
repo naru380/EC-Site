@@ -5,7 +5,8 @@ CREATE TABLE items (
     name VARCHAR(64) NOT NULL,
     price INT NOT NULL,
     image VARCHAR(32),
-    description VARCHAR(256)
+    description VARCHAR(256),
+    view INT DEFAULT 0
 );
 
 INSERT INTO items (name, price, image, description) VALUES ("魚", 100, "1.jpg", "食べごろです！");

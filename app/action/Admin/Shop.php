@@ -1,19 +1,19 @@
 <?php
 /**
- *  Logout.php
+ *  Admin/Shop.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  logout Form implementation.
+ *  admin_shop Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_Logout extends Sample_ActionForm
+class Sample_Form_AdminShop extends Sample_ActionForm
 {
     /**
      *  @access protected
@@ -63,16 +63,16 @@ class Sample_Form_Logout extends Sample_ActionForm
 }
 
 /**
- *  logout action implementation.
+ *  admin_shop action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_Logout extends Sample_AuthActionClass
+class Sample_Action_AdminShop extends Sample_AdminActionClass
 {
     /**
-     *  preprocess of logout Action.
+     *  preprocess of admin_shop Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -91,16 +91,13 @@ class Sample_Action_Logout extends Sample_AuthActionClass
     }
 
     /**
-     *  logout action implementation.
+     *  admin_shop action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     public function perform()
     {
-        $this->session->set('auth', null);
-        $this->session->set('id', null);
-        $this->session->destroy();
-        return 'logout';
+        return 'admin_shop';
     }
 }

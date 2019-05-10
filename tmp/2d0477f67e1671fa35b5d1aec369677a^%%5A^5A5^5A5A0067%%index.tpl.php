@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-07 16:47:16
+<?php /* Smarty version 2.6.31, created on 2019-05-07 22:48:23
          compiled from admin/index.tpl */ ?>
 <h1>テストページ</h1>
 

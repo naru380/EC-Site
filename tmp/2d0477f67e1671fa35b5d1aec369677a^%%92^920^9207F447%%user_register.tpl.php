@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-06 00:34:54
+<?php /* Smarty version 2.6.31, created on 2019-05-08 16:28:42
          compiled from mail/user_register.tpl */ ?>
 <?php echo $this->_tpl_vars['username']; ?>
 様

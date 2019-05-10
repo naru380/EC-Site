@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="/css/ethna.css" type="text/css" />
+<link rel="stylesheet" href="/css/ethna2.css" type="text/css" />
 <title>通販サイト</title>
 </head>
     <header>

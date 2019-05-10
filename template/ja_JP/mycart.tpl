@@ -8,27 +8,30 @@
             <img src="./images/0.jpg">
         {/if}
         <div class="mycart-item-text">
-            <p>{$item.name}</p>
-            <p>{$item.price|number_format}</p>
-            <p>{$item.num}個</p>
+            <h3>{$item.name}</h3>
+            <p>
+                <span class="item-price">¥{$item.price|number_format}</span>
+                 × {$item.num}個
+            </p>
             {assign var="request" value="/?action_item=true&item_id="|cat:$item.id}
-            <input type="button" onclick={"location.href='$request'"} value="商品詳細">
             <form action="." method="post">
                 <input type="hidden" name="delete" value="{$item.id}">
                 <input type="submit" name="action_mycart_delete" value="削除">
             </form>
+            <input type="button" onclick={"location.href='$request'"} value="商品詳細">
         </div>
     </div>
 {/foreach}
 
-<div class="mycart-prcedure">
-    <p>合計: {$form.check|number_format}円</p>
-    <form action="." method="post">
-        <input type="hidden" name="delete" value="0">
-        <input type="submit" name="action_mycart_delete" value="全て削除">
-    </form>
-    <form action="." method="post">
-        <input type="hidden" name="delete" value="0">
-        <input type="submit" name="action_mycart_confirm" value="購入手続き">
-    </form>
+<div class="mycart-procedure-dummy">
+    <div class="mycart-procedure">
+        <p>合計: <span class="item-price">¥{$form.check|number_format}</span></p>
+        <form action="." method="post">
+            <input type="hidden" name="delete" value="0">
+            <input type="submit" name="action_mycart_delete" value="全て削除">
+        </form>
+        <form action="." method="post">
+            <input type="submit" name="action_mycart_purchase" value="購入手続き">
+        </form>
+    </div>
 </div>

@@ -1,25 +1,44 @@
 <?php
 /**
- *  Logout.php
+ *  Admin/Shop/Do.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  logout Form implementation.
+ *  admin_shop_do Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_Logout extends Sample_ActionForm
+class Sample_Form_AdminShopDo extends Sample_ActionForm
 {
     /**
      *  @access protected
      *  @var    array   form definition.
      */
     public $form = array(
+        'name' => array(
+            'type'      => VAR_TYPE_STRING,
+            'form_type' => FORM_TYPE_TEXT,
+            'required'  => true,
+        ),
+        'price' => array(
+            'type'      => VAR_TYPE_INT,
+            'form_type' => FORM_TYPE_TEXT,
+            'required'  => true,
+        ),
+        'description' => array(
+            'type'      => VAR_TYPE_STRING,
+            'form_type' => FORM_TYPE_TEXTAREA,
+            'required'  => true,
+        ),
+        'image' => array(
+            'form_type' => FORM_TYPE_FILE,
+            'required'  => false,
+        ),
        /*
         *  TODO: Write form definition which this action uses.
         *  @see http://ethna.jp/ethna-document-dev_guide-form.html
@@ -63,16 +82,16 @@ class Sample_Form_Logout extends Sample_ActionForm
 }
 
 /**
- *  logout action implementation.
+ *  admin_shop_do action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_Logout extends Sample_AuthActionClass
+class Sample_Action_AdminShopDo extends Sample_AdminActionClass
 {
     /**
-     *  preprocess of logout Action.
+     *  preprocess of admin_shop_do Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -80,6 +99,9 @@ class Sample_Action_Logout extends Sample_AuthActionClass
      */
     public function prepare()
     {
+        if ($this->af->validate() > 0) {
+            return 'admin_shop';
+        }
         /**
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
@@ -91,16 +113,29 @@ class Sample_Action_Logout extends Sample_AuthActionClass
     }
 
     /**
-     *  logout action implementation.
+     *  admin_shop_do action implementation.
      *
      *  @access public
-     *  @return string  forward name.
+     *  4@return string  forward name.
      */
     public function perform()
     {
-        $this->session->set('auth', null);
-        $this->session->set('id', null);
-        $this->session->destroy();
-        return 'logout';
+        $im = new Sample_ItemManager();
+
+
+        //move_uploaded_file($this->af->get('image'), 'aaa');
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            //if (move_uploaded_file($_FILES['image']['tmp_name'], './aaa.jpg') ) {
+            //    echo "成功";
+            //}
+        } else {
+            echo "失敗";
+        }
+
+        //echo $this->af->get('image');
+        //$this->af->set('image');
+
+
+        return 'admin_shop';
     }
 }

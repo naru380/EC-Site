@@ -1,19 +1,19 @@
 <?php
 /**
- *  Index.php
+ *  Admin/Shop.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  Index view implementation.
+ *  admin_shop view implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_View_Index extends Sample_ViewClass
+class Sample_View_AdminShop extends Sample_ViewClass
 {
     /**
      *  preprocess before forwarding.
@@ -22,10 +22,6 @@ class Sample_View_Index extends Sample_ViewClass
      */
     public function preforward()
     {
-        $im = new Sample_ItemManager();
-        $items = $im->getMostViewItems(3);
-        
-        $this->af->set('most_viewed_items', $items);
     }
 }
 

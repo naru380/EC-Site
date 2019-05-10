@@ -112,8 +112,6 @@ class Sample_Action_Item extends Sample_ActionClass
             return 'shop';
         }
 
-        $this->af->set('item', $item);
-
         return 'item';
     }
 }

@@ -111,13 +111,19 @@ footer {
     //margin-bottom: 20px;
     border-bottom: 1px solid #333333;
     margin: 1em 0;
+    display: inline-block;
+    width: 100%;
 }
 
 .error_message {
     color: #F06060;
 }
 
-.item-list {
+.shop-list {
+    display: block;
+}
+
+.shop-list-item {
     border: 1px solid #EEEEEE;
     margin-bottom: 40px;
     margin-right: 40px;
@@ -125,7 +131,7 @@ footer {
     float: left;
 }
 
-.item-list img {
+.shop-list-item img {
     display: inline-block;
     background-color: #CCCCCC;
     background-position: center center;
@@ -136,40 +142,79 @@ footer {
     margin: 10px 0px;
 }
 
-.item-list p {
+.shop-list-item p {
     color: #F06060;
 }
 
-.item-list input {
+.shop-list-item input {
     margin-top: 20px;
     float: right;
 }
 
-.item-list-text {
+.shop-list-item-text {
     padding: 0px 10px;
 }
 
+#about td {
+    padding: 5px 10px;
+}
+
 /*
-.mycart-item {
-    height: 1000px;
+#item-detail {
     border: 1px solid #EEEEEE;
     margin-bottom: 40px;
     margin-right: 40px;
     padding: 20px 0px;
     float: left;
 }
+*/
 
-.mycart-item img {
+#item-detail img {
     display: inline-block;
     background-color: #CCCCCC;
     background-position: center center;
     background-repeat: no-repeat;
-    width: 250px;
-    height: 250px;
+    width: 35%;
+    //width: 500px;
+    //height: 500px;
     background-size: contain;
-    margin: 10px 0px;
+    //margin: 10px 0px;
 }
-*/
+
+#item-detail-text {
+    //padding: 0px 10px;
+    //background-color: red;
+    width: 55%;
+    float: right;
+}
+
+#item-detail-text-purchase {
+    display: inline-block;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#item-detail-text-purchase-inputs {
+    float: right;
+}
+
+#item-detail-text-purchase-inputs input {
+    float: left;
+}
+
+#item-detail-text-purchase-price {
+    color: #F06060;
+    display: inline-block;
+    float: left;
+}
+
+.item-description {
+    display: inline-block;
+    border-top: solid 1px #CCCCCC;
+    padding-top: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
 
 /*
 #main img {
