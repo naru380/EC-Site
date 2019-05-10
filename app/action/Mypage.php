@@ -98,6 +98,33 @@ class Sample_Action_Mypage extends Sample_AuthActionClass
      */
     public function perform()
     {
+        $om = new Sample_OrderManager();
+        $im = new Sample_ItemManager();
+        $user_id = $this->session->get('id');
+        $buy_ats = $om->getMyordersAt($user_id);
+
+        $myorders = array();
+        foreach($buy_ats as $buy_at) {
+            $myorder = $om->getMyorder($user_id, $buy_at['buy_at']);
+            //$myorders += array("{$buy_at}" => $myorder);
+            $items = array();
+            foreach($myorder as $a) {
+                //echo $myorder['user_id'];
+                $item = $im->getItemInfoWithId($a['item_id']);
+                $item += array(
+                    'num'   => $a['num']
+                );
+                $items += array(
+                    $a['item_id']    => $item
+                );
+            }
+            $myorders += array(
+                $buy_at['buy_at'] => $items
+            );
+        }
+
+        $this->af->set('myorders', $myorders);
+
         return 'mypage';
     }
 }

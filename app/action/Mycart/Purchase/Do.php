@@ -138,6 +138,13 @@ class Sample_Action_MycartPurchaseDo extends Sample_AuthActionClass
         $mail = new Sample_MailManager();
         $mail->sendMail($to, $toname, $subject, $body);
 
+        $om = new Sample_OrderManager();
+        $now = date("Y-m-d H:i:s");
+
+        foreach ($items as $item) {
+            $om->addOrder($id, $item['id'], $item['num'], $now);
+        }
+
         $mm->removeItem($this->session->get('id'), 0);
 
         return 'mycart_purchase_do';
