@@ -23,9 +23,11 @@ class Sample_View_Index extends Sample_ViewClass
     public function preforward()
     {
         $im = new Sample_ItemManager();
-        $items = $im->getMostViewItems(3);
+        $most_viewed_items = $im->getMostViewItems(3);
+        $recently_added_items = $im->getRecentlyAddItems(3);
         
-        $this->af->set('most_viewed_items', $items);
+        $this->af->set('most_viewed_items', $most_viewed_items);
+        $this->af->set('recently_added_items', $recently_added_items);
     }
 }
 

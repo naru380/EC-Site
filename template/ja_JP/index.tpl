@@ -24,4 +24,24 @@
             </div>
         {/foreach}
     </div>
+
+    <h2>新商品</h2>
+    <div class="new-items">
+        {foreach from=$form.recently_added_items item=item}
+            <div class="new-item">
+                <h3>{$item.created_at|date_format:"%m月%d日"} 追加</h3>
+                {if $item.image != NULL}
+                    <img src="{"./images/"|cat:$item.image}">
+                {else}
+                    <img src="./images/0.jpg">
+                {/if}
+                <div class="new-item-text">
+                    <p>{$item.name}</p>
+                    <p class="item-price">¥{$item.price|number_format}</p>
+                    {assign var="request" value="/?action_item=true&item_id="|cat:$item.id}
+                    <input type="button" onclick={"location.href='$request'"} value="商品詳細ページ">
+                </div>
+            </div>
+        {/foreach}
+    </div>
 </div>

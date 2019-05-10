@@ -109,6 +109,24 @@ class Sample_ItemManager
         return $data;
     }
 
+    public function getRecentlyAddItems($limit)
+    {
+        try {
+            $pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+            $pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
+            $stmt = $pdo->prepare('SELECT * FROM items ORDER BY created_at DESC LIMIT ?');
+            $stmt->bindParam(1, $limit, PDO::PARAM_INT);
+            $data = $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+        $pdo = null;
+
+        return $data;
+    }
+
     public function addItem($name, $price, $description)
     {
         try {

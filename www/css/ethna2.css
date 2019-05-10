@@ -81,6 +81,34 @@
     padding: 0px 10px;
 }
 
+.new-item {
+    border: 1px solid #EEEEEE;
+    margin-bottom: 40px;
+    margin-right: 40px;
+    padding: 20px 0px;
+    float: left;
+}
+
+.new-item img {
+    display: inline-block;
+    background-color: #CCCCCC;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 250px;
+    background-size: contain;
+    margin: 10px 0px;
+}
+
+.new-item input {
+    margin-top: 20px;
+    float: right;
+}
+
+.new-item-text {
+    padding: 0px 10px;
+}
+
 #search-box {
     //margin: 1em 0;
     float: right;
