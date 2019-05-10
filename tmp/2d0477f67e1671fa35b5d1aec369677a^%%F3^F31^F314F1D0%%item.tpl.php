@@ -1,7 +1,20 @@
-<?php /* Smarty version 2.6.31, created on 2019-05-10 14:11:15
+<?php /* Smarty version 2.6.31, created on 2019-05-10 16:36:38
          compiled from item.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'item.tpl', 5, false),array('modifier', 'number_format', 'item.tpl', 12, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'cat', 'item.tpl', 17, false),array('modifier', 'number_format', 'item.tpl', 24, false),)), $this); ?>
+<?php if ($this->_tpl_vars['session']['mode'] == 'admin'): ?>
+<div style="float: right;">
+    <form action="." method="post">
+    <!--
+        <input type="submit" name="action_admin_shop_edit" value="商品を編集">
+    -->
+        <input type="hidden" name="item_id" value="<?php echo $this->_tpl_vars['form']['item']['id']; ?>
+">
+        <input type="submit" name="action_admin_shop_delete" value="商品を削除">
+    </form>
+</div>
+<?php endif; ?>
+
 <h2>商品詳細</h2>
 
 <div id="item-detail">

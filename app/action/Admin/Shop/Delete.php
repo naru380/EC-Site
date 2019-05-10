@@ -1,44 +1,30 @@
 <?php
 /**
- *  Admin/Shop/Do.php
+ *  Admin/Shop/Delete.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  admin_shop_do Form implementation.
+ *  admin_shop_delete Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_AdminShopDo extends Sample_ActionForm
+class Sample_Form_AdminShopDelete extends Sample_ActionForm
 {
     /**
      *  @access protected
      *  @var    array   form definition.
      */
     public $form = array(
-        'name' => array(
-            'type'      => VAR_TYPE_STRING,
-            'form_type' => FORM_TYPE_TEXT,
-            'required'  => true,
-        ),
-        'price' => array(
-            'type'      => VAR_TYPE_INT,
-            'form_type' => FORM_TYPE_TEXT,
-            'required'  => true,
-        ),
-        'description' => array(
-            'type'      => VAR_TYPE_STRING,
-            'form_type' => FORM_TYPE_TEXTAREA,
-            'required'  => true,
-        ),
-        'image' => array(
-            'form_type' => FORM_TYPE_FILE,
-            'required'  => false,
-        ),
+            'item_id' => array(
+                'type'      => VAR_TYPE_INT,
+                'form_type' => FORM_TYPE_HIDDEN,
+                'required'  => true,
+            ),
        /*
         *  TODO: Write form definition which this action uses.
         *  @see http://ethna.jp/ethna-document-dev_guide-form.html
@@ -82,16 +68,16 @@ class Sample_Form_AdminShopDo extends Sample_ActionForm
 }
 
 /**
- *  admin_shop_do action implementation.
+ *  admin_shop_delete action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_AdminShopDo extends Sample_AdminActionClass
+class Sample_Action_AdminShopDelete extends Sample_AdminActionClass
 {
     /**
-     *  preprocess of admin_shop_do Action.
+     *  preprocess of admin_shop_delete Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -100,7 +86,7 @@ class Sample_Action_AdminShopDo extends Sample_AdminActionClass
     public function prepare()
     {
         if ($this->af->validate() > 0) {
-            return 'admin_shop';
+            return 'item';
         }
         /**
         if ($this->af->validate() > 0) {
@@ -113,33 +99,24 @@ class Sample_Action_AdminShopDo extends Sample_AdminActionClass
     }
 
     /**
-     *  admin_shop_do action implementation.
+     *  admin_shop_delete action implementation.
      *
      *  @access public
-     *  4@return string  forward name.
+     *  @return string  forward name.
      */
     public function perform()
     {
         $im = new Sample_ItemManager();
+        $item_id = $this->af->get('item_id');
+        $item = $im->getItemInfoWithId($item_id);
 
-        $name = $this->af->get('name');
-        $price = $this->af->get('price');
-        $description = $this->af->get('description');
+        $im->deleteItem($item_id);
 
-        $id = $im->addItem($name, $price, $description);
-        $item = $im->getItemInfoWithId($id);
-        
-        if ($_FILES != null) {
-            $ext = substr($_FILES['image']['name'], strrpos($_FILES['image']['name'], '.') + 1);
-
-             if(! move_uploaded_file($_FILES['image']['tmp_name'], "/var/www/rockwave/www/images/{$id}.{$ext}")) {
-                 $im->deleteItem($id);
-                return 'admin_shop';
-             }
-            $im->editItem($id, $item['name'], $item['price'], $item['description'], "{$id}.jpg");
+        if($item['image'] != null) {
+            unlink("/var/www/rockwave/www/images/{$item['image']}");
         }
 
-        $this->af->set('message', '商品を追加しました');
+        $this->af->set('message', '商品を削除しました');
 
         return 'admin_index';
     }

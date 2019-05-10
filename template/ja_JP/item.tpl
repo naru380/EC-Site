@@ -1,3 +1,15 @@
+{if $session.mode == 'admin'}
+<div style="float: right;">
+    <form action="." method="post">
+    <!--
+        <input type="submit" name="action_admin_shop_edit" value="商品を編集">
+    -->
+        <input type="hidden" name="item_id" value="{$form.item.id}">
+        <input type="submit" name="action_admin_shop_delete" value="商品を削除">
+    </form>
+</div>
+{/if}
+
 <h2>商品詳細</h2>
 
 <div id="item-detail">
@@ -24,3 +36,4 @@
         </div>
     </div>
 </div>
+

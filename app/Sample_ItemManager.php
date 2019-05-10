@@ -109,13 +109,46 @@ class Sample_ItemManager
         return $data;
     }
 
-    public function addItem($name, $price, $description, $image)
+    public function addItem($name, $price, $description)
     {
         try {
             $pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
             $pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
-            $stmt = $pdo->prepare('INSERT INTO items (name, price, description, image) VALUES (?, ?, ?, ?)');
-            $data = $stmt->execute([$name, $price, $description, $image]);
+            $stmt = $pdo->prepare('INSERT INTO items (name, price, description) VALUES (?, ?, ?)');
+            $data = $stmt->execute([$name, $price, $description]);
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+
+        $id = $pdo->lastInsertId('id');
+
+        $pdo = null;
+
+        return $id;
+    }
+
+    public function editItem($id, $name, $price, $description, $image)
+    {
+        try {
+            $pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+            $pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
+            $stmt = $pdo->prepare('UPDATE items SET name = ?, price = ?, description = ?, image = ? WHERE id = ?');
+            $data = $stmt->execute([$name, $price, $description, $image, $id]);
+        } catch (PDOException $e) {
+            exit($e->getMessage());
+        }
+        $pdo = null;
+
+        return null;
+    }
+
+    public function deleteItem($id)
+    {
+        try {
+            $pdo = new PDO($this->dsn, $this->user, $this->password, array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+            $pdo->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, 'SET NAMES utf8');
+            $stmt = $pdo->prepare('DELETE FROM items WHERE id = ?');
+            $data = $stmt->execute([$id]);
         } catch (PDOException $e) {
             exit($e->getMessage());
         }

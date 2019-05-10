@@ -115,6 +115,10 @@ footer {
     width: 100%;
 }
 
+#main img {
+    object-fit: cover;
+}
+
 .error_message {
     color: #F06060;
 }
