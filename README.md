@@ -85,7 +85,7 @@ $ docker exec -it ec_site /bin/bash
 ```shell-session
 # yum -y install epel-release
 # rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
-# sudo yum -y install --enablerepo=remi,remi-php56 php
+# yum -y install --enablerepo=remi,remi-php56 php
 ```
 
 ここまでで、Webサーバの構築に必要なApacheがインストールされていない場合は次のコマンドでインストールする。
